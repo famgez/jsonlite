@@ -76,6 +76,8 @@
 fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
   simplifyMatrix = simplifyVector, flatten = FALSE, ...) {
 
+  args = list(...)
+  
   # check type
   if (!is.character(txt) && !inherits(txt, "connection")) {
     stop("Argument 'txt' must be a JSON string, URL or file.")
@@ -87,6 +89,9 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
       loadpkg("curl")
       h <- curl::new_handle(useragent = paste("jsonlite /", R.version.string))
       curl::handle_setheaders(h, Accept = "application/json, text/*, */*")
+      if ( !is.null( args$.opts)) {
+        curl::handle_setopt(h, .list = args$.opts)
+      }
       txt <- curl::curl(txt, handle = h)
     } else if (file.exists(txt)) {
       # With files we can never know for sure the encoding. Lets try UTF8 first.
