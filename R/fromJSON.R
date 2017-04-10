@@ -103,7 +103,7 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
 
   # call the actual function (with deprecated arguments)
   fromJSON_string(txt = txt, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame,
-    simplifyMatrix = simplifyMatrix, flatten = flatten, ...)
+    simplifyMatrix = simplifyMatrix, flatten = flatten, args)
 }
 
 fromJSON_string <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
