@@ -91,6 +91,7 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
       curl::handle_setheaders(h, Accept = "application/json, text/*, */*")
       if ( !is.null( args$.opts)) {
         curl::handle_setopt(h, .list = args$.opts)
+        args[[".opts"]] <- NULL
       }
       txt <- curl::curl(txt, handle = h)
     } else if (file.exists(txt)) {
